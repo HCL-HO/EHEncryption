@@ -11,6 +11,7 @@ import EncryptionUtil.EncryptionUtil;
 import EncryptionUtil.RSAUtil;
 import EncryptionUtil.SymmetricEncryptUtil;
 import Property.PropertyManager;
+import Property.SettingManager;
 
 
 public class Process {
@@ -20,18 +21,26 @@ public class Process {
 
 		DoubleEncrypt DE = new DoubleEncrypt();
 //
-		String[] except = new String[]{
-			"test","UAT", "Mapping", "Deployment", "Release Note", "archive", "3000-12-3-7 PMI Search Enhancement"	
-		};
+//		String[] except = new String[]{
+//			"test","UAT", "Mapping", "Deployment", "Release Note", "archive", "3000-12-3-7 PMI Search Enhancement"	
+//		};
+//		
+//		List<File> files = new FileSearcher().searchAllInnerFilesContainExcept(new File
+//				("C:\\Users\\eric cl ho\\Desktop\\meeting 23012017"), new String[]{""}, null);
+//		
+//		System.out.println("-----------------------Files size: " + files.size() + "--------------------------------------");
+//		for(File f : files){
+//			System.out.println("File: "+ f.getAbsolutePath());
+//			DE.getRandomSymetricKey(f.getParent()).encryptReplace(f).encryptKeyWithDefaultPublicKey();
+//		}
+//	
+//		for(File f : files){
+//			System.out.println("File: "+ f.getAbsolutePath());
+//			DE.getRandomSymetricKey(f.getParent()).decryptReplace(f).encryptKeyWithDefaultPublicKey();
+//		}
 		
-		List<File> files = new FileSearcher().searchAllInnerFilesContainExcept(new File
-				("C:\\Users\\eric cl ho\\Desktop\\PDF"), MyFilter.documents, null);
-		
-		System.out.println("-----------------------Files size: " + files.size() + "--------------------------------------");
-		for(File f : files){
-			System.out.println("File: "+ f.getAbsolutePath());
-			DE.getRandomSymetricKey(f.getParent()).decryptReplace(f).encryptKeyWithDefaultPublicKey();
-		}
+//		new SettingManager().setProperties("ASD", "1213");
+		new SettingManager().removeProperties("ASD");
 //		
 //		List<File> files1 = new FileSearcher().searchAllInnerFilesContainExcept(new File
 //				("C:\\Users\\eric cl ho\\Desktop\\PDF"), MyFilter.documents, null);

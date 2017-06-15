@@ -1,6 +1,10 @@
 package EncryptionMethod;
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.List;
 
 import CommonUtil.RandomStringGenerator;
@@ -76,6 +80,7 @@ public class DoubleEncrypt{
 		
 		public ReturnKey encryptReplace(File file){
 			SEU.encryptFile(file).writeAndReplace();
+			createReadMe();
 			return this;
 		}
 		
@@ -87,6 +92,7 @@ public class DoubleEncrypt{
 		public ReturnKey encryptFileToPath(File file){
 //			SEU = new SysmetricEncryptUtil(symKey, 16);
 			SEU.encryptFile(file).writeToPath(encryptPath);
+			createReadMe();
 			return this;
 		}		
 		
@@ -96,6 +102,7 @@ public class DoubleEncrypt{
 			for(File f : files){
 				SEU.encryptFile(f).writeToPath(encryptPath);
 			}
+			createReadMe();
 			return this;
 		}		
 		
@@ -125,6 +132,28 @@ public class DoubleEncrypt{
 			RU.encryptFile(new File(keyPath)).writeAndReplace();
 			System.out.println("----------------- Symetric Key is encrypted--------------------");
 			System.out.println("Path: "+ encryptPath);
+		}
+		
+		private void createReadMe(){
+			File f = new File("ReadMe");
+			try {
+				FileInputStream FIS = new FileInputStream(f);
+				byte[] read = new byte[(int) f.length()];
+				FIS.read(read);
+				
+				File readMe = new File(encryptPath+"\\ReadMe"+"\\"+ "ReadMe.txt");
+				if(readMe.getParentFile()!=null){
+					readMe.getParentFile().mkdirs();
+				}
+				if(!readMe.exists()){
+					FileOutputStream FOS =  new FileOutputStream(readMe);
+					FOS.write(read);
+				}
+			} catch (FileNotFoundException e) {
+				e.printStackTrace();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
 		}
 	}
 
